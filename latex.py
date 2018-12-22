@@ -1,67 +1,38 @@
 #coding:utf-8
+# Coded by Seyptoo
 
 import sys
-import requests
-import options as argument
-import Queue
+import os as command_execution
 
-from optparse import *
-from threading import Thread
+class SevenZipIncorrect(Exception):
+	def __init__(self, error_7zip):
+		self.error_7zip = error_7zip
 
-class pyDirb(Thread):
-	def __init__(self, threads=35):
-		# options create on 'options.py'.
-		self.URL = argument.url
-		self.WORDLIST = argument.wordlist
-		self.DIRECTORY = argument.directory
+class SevenZip(object):
+	def __init__(self):
+		# Create argument with sys ! :D
+		self.files_7z = sys.argv[1]
+		self.wordlist = sys.argv[2]
 
-		self.THREADS = threads
-		Thread.__init__(self)
+	def SevenZIP(self):
+		if(self.files_7z.endswith(".7z") == True):
+			with open(self.wordlist, "r") as file:
+				for file_output in file.readlines():
+					# Create loop for bruteforce ! :D
+					file_output = file_output.strip("\n")
+					send_cmd = "7z x -p%s %s -aoa >/dev/null" %(file_output, self.files_7z)
+					# Creating command for sending ! :D
+					BertModel = command_execution.system(send_cmd)
 
-	def brute_functions(self, q):
-		"""
-		This function will take
-		the port defined in the URL :D
-		Parameters
-		----------
-		self : X
-			The parameter 'self' is a supervariable that can communicate anywhere.
-		Return
-		----------
-		Return port or nothing
-		"""
-		if(self.DIRECTORY == True):
-			while True:
-				wordlist_boolen = q.get()
+					if not(BertModel == 0):
+						print "[-] Password not found sorry : %s" %(file_output)
+					else:
+						print "\n[+] Password 7z cracked with success : %s\n" %(file_output)
+						sys.exit(0)
 
-	def run(self):
-		"""
-		This function will take
-		the port defined in the URL :D
-		Parameters
-		----------
-		self : X
-			The parameter 'self' is a supervariable that can communicate anywhere.
-		Return
-		----------
-		Return port or nothing
-		"""
-		q = Queue.Queue()
-
-		with open(self.WORDLIST, "r") as file:
-			for line_strip in file:
-				q.put(line_strip.rstrip("\n\r"))
-
-			self.brute_functions(q)
-
-		for i in self.THREADS:
-			wrapper = threading.Thread(target=self.brute_functions(i), args=(i, q))
-			wrapper.setDaemon(True)
-			wrapper.start()
-			wrapper.join(600)
-
-		q.join()
+		elif not(self.files_7z.endswith(".7z")):
+			raise SevenZipIncorrect("Error file extension")
 
 if __name__ == "__main__":
-	Algorithm = pyDirb()
-	Algorithm.start()
+	Algorithm = SevenZip()
+	Algorithm.SevenZIP()
