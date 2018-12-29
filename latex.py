@@ -1,40 +1,47 @@
 #coding:utf-8
-# Coded by Seyptoo
 
 import sys
-import os as command_execution
+import os
+import Queue
+import threading
+import optparse
+import py7zlib
 
 class SevenZipIncorrect(Exception):
-	def __init__(self, error_7zip):
-		self.error_7zip = error_7zip
+	def __init__(self, error_zip):
+		self.error_zip = error_zip
 
-class SevenZip(object):
-	def __init__(self):
-		# Create argument with sys ! :D
-		self.files_7z = sys.argv[1]
-		self.wordlist = sys.argv[2]
+class SevenZip(threading.Thread):
+	def __init__(self, threads=35):
+		threading.Thread.__init__(self)
+		# System of Threads is present
+		self.threads_tds = threads
+		self.argument_on = sys.argv[1]
+		self.argument_wd = sys.argv[2]
 
-	def SevenZIP(self):
-		if(self.files_7z.endswith(".7z") == True):
-			with open(self.wordlist, "r") as file:
-				file = file.readlines()
-				# Read files ! :)
-			for file_output in file:
-				# Create loop for bruteforce ! :D
-				file_output = file_output.strip("\n")
-				send_cmd = "7z x -p%s %s -aoa >/dev/null" %(file_output, self.files_7z)
-				# Creating command for sending ! :D
-				BertModel = command_execution.system(send_cmd)
+	def ExtensionModel(self, q):
+		if(self.argument_on.endswith(".7z") == True):
+			while True:
+				BertModel = q
+				BertModel = BertModel.get()
+		else: # exceptions error
+			raise SevenZipIncorrect("ExtensionFileIncorrect")
 
-				if not(BertModel == 0):
-					print "[-] Password not found sorry : %s" %(file_output)
-				else:
-					print "\n[+] Password 7z cracked with success : %s\n" %(file_output)
-					sys.exit(0)
+	def run(self):
+		q = Queue.Queue()
+		with open(self.argument_wd, "r") as BertModel:
+			for Queue_Reverse in BertModel:
+				q.put(Queue_Reverse.rstrip("\n\r"))
+			self.ExtensionModel(q)
 
-		elif not(self.files_7z.endswith(".7z")):
-			raise SevenZipIncorrect("Error file extension")
+		for i in range(int(self.threads_tds)):
+			wrapper = threading.Thread(target=self.ExtensionModel, args=(i, q))
+			wrapper.setDaemon(True)
+			wrapper.start()
+			wrapper.join(600)
+
+		q.join()
 
 if __name__ == "__main__":
 	Algorithm = SevenZip()
-	Algorithm.SevenZIP()
+	Algorithm.start()
