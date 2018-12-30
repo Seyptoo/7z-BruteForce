@@ -50,7 +50,7 @@ class SevenZip(threading.Thread):
 					print "[-] Password not cracked : %s" %(BertModel)
 
 		else: # exceptions error
-			raise SevenZipIncorrect("ExtensionFileIncorrect")
+			raise SevenZipIncorrect("File is extensions incorrect")
 
 	def run(self):
 		"""
