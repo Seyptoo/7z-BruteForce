@@ -46,7 +46,7 @@ class SevenZip(threading.Thread):
 				if(output_status_ts == 0):
 					print "\n[+] Password cracked with success : %s\n" %(BertModel)
 					sys.exit(1)
-				else:
+				else: # If password is not cracked.
 					print "[-] Password not cracked : %s" %(BertModel)
 
 		else: # exceptions error
