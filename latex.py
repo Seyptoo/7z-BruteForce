@@ -28,7 +28,7 @@ class SevenZip(threading.Thread):
 		Parameters
 		----
 			self : They are supervariables or they can communicate anywhere
-			q = The variable q is the wordlist is called
+			q : The variable q is the wordlist is called
 
 		Returns
 		----
