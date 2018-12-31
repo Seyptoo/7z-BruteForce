@@ -56,7 +56,6 @@ class KalBinary(object):
 				# We are in a condition that will test specific variables like the variable #FirstValue #SecondValue
 				# Variables that behave in a way with bytes.
 
-
 				if AddModel == int(octet_algorithm):
 					self.hash_dec = "%s+%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
 				if SubModel == int(octet_algorithm):
