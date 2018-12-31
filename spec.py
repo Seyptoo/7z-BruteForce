@@ -20,9 +20,10 @@ class KalBinary(object):
 		self.CalculationOctet = CalculationOctet
 		self.ArgumentationFal = ArgumentationFal
 		self.AlphabetEu = AlphabetEu
-		self.encrypt = argument.encrypt
+		self.Encrypt = argument.encrypt
 
 	def BertModel(self, octet_algorithm):
+		global octet_algorithm
 		"""
 		This function will handle
 		the data encryption.
@@ -45,28 +46,33 @@ class KalBinary(object):
 				Sub_Model = self.CalculationOctet - self.CalculationBytes
 				MulModel  = self.CalculationBytes * self.CalculationOctet
 
-				FirstValue = int(self.CalculationBytes / self.CalculationOctet)
-				SecondValue = int(self.CalculationOctet / self.CalculationBytes)
+				try:
 
-				if FirstValue == int(octet_algorithm):
-					self.ArgumentationFal = "%s/%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
-				if SecondValue == int(octet_algorithm):
-					self.ArgumentationFal = "%s/%s=" % (str(self.CalculationOctet), str(self.CalculationBytes))
-				
+					FirstValue = int(self.CalculationBytes / self.CalculationOctet)
+					SecondValue = int(self.CalculationOctet / self.CalculationBytes)
+
+					if FirstValue == int(self.aa):
+						self.ArgumentationFal = "%s/%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
+					if SecondValue == int(self.aa):
+						self.ArgumentationFal = "%s/%s=" % (str(self.CalculationOctet), str(self.CalculationBytes))
+
+				except:
+					pass
+
 				# We are in a condition that will test specific variables like the variable #FirstValue #SecondValue
 				# Variables that behave in a way with bytes.
 
-				if AddModel == int(octet_algorithm):
+				if AddModel == int(self.aa):
 					self.ArgumentationFal = "%s+%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
-				if SubModel == int(octet_algorithm):
+				if SubModel == int(self.aa):
 					self.ArgumentationFal = "%s-%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
 
 				# We do not have supervariables like for example with the selfs or that kind of thing.
 				# But it's always good to have the selfs to communicate the variables everywhere.
 
-				if Sub_Model == int(octet_algorithm):
+				if Sub_Model == int(self.aa):
 					self.ArgumentationFal = "%s-%s=" % (str(self.CalculationOctet), str(self.CalculationBytes))
-				if MulModel == int(octet_algorithm):
+				if MulModel == int(self.aa):
 					self.ArgumentationFal = "%s*%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
 
 		return self.ArgumentationFal
@@ -129,20 +135,3 @@ class KalBinary(object):
 			ArgumentList.append(SegmentTwo)
 		
 		return(ArgumentList)
-
-	def run(self): 
-
-		calc_text = ""
-
-		bin_list = self.BertBinary(ArgumentTexte)
-
-		for octet in bin_list:
-			calcul = self.BertModel(octet_algorithm)
-			calc_text += calcul
-
-		final_crypt = self.BertPanel(calc_text)
-		print("HASH : "+final_crypt)
-
-if __name__ == "__main__":
-	Algorithm = KalBinary()
-	Algorithm.run()	
