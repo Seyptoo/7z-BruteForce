@@ -1,25 +1,26 @@
 #coding:utf-8
 
 import sys
-import options
+import subprocess
+import os
+import options as argument
 
-class DecryptErrorHash(Exception):
-	def __init__(self, hash_spawn):
-		# If decrypt is incorrect or hash.
-		self.hash_spawn = hash_spawn
-	
-class InvalidErrorHash(Exception):
-	def __init__(self, bert_hashs):
-		# If hash is invalid got to error.
-		self.bert_hashs = bert_hashs
+CHECK_VERSION = sys.version_info <= (3,0)
+if(CHECK_VERSION):
+	sys.exit("[-] Version of Python is incorrect")
 
 class KalBinary(object):
-	def __init__(self, hashs_decs=None):
-		# Argument on called.
-		self.encrypt = options.encrypt
-		self.decrypt = options.decrypt
-		self.validys = options.validys
-		self.decs_hash = hashs_decs
+	def __init__(self,
+				algorithms_params=None,
+				CalculationBytes=None,
+				CalculationOctet=None,
+				hash_dec=None):
+
+		self.algorithms = algorithms_params
+		self.CalculationBytes = CalculationBytes
+		self.CalculationOctet = CalculationOctet
+		self.hash_dec = hash_dec
+		self.encrypt = argument.encrypt
 
 	def BertModel(self, octet_algorithm):
 		"""
@@ -36,31 +37,37 @@ class KalBinary(object):
 		Returns octets with success and brow.
 		finished.
 		"""
-		for propertys in range(0, 10000):
-			for verboses in range(0,10000):
-				wrapper = propertys + verboses
-				# Loop for testing data. :D
-				restricted = propertys - verboses
-				restrictes = verboses - propertys
-				multipdata = propertys * verboses
+		for self.CalculationBytes in range(0, 10000):
+			for self.CalculationOctet in range(0, 10000):
+				# Create loop for hashing.
+				AddModel = self.CalculationBytes + self.CalculationOctet
+				SubModel = self.CalculationBytes - self.CalculationOctet
+				Sub_Model = self.CalculationOctet - self.CalculationBytes
+				MulModel  = self.CalculationBytes * self.CalculationOctet
+
+				FirstValue = int(self.CalculationBytes / self.CalculationOctet)
+				SecondValue = int(self.CalculationOctet / self.CalculationBytes)
+
+				if FirstValue == int(octet_algorithm):
+					self.hash_dec = "%s/%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
+				if SecondValue == int(octet_algorithm):
+					self.hash_dec = "%s/%s=" % (str(self.CalculationOctet), str(self.CalculationBytes))
 				
-				modeexecs = int(propertys / verboses)
-				modeexecd = int(verboses / propertys)
-
-				if(modeexecs == int(octet_alogorithm)):
-					self.decs_hash = ("%s/%s=") %(str(propertys), str(verboses))
-				if(modeexecs == int(modeexecd)):
-					self.decs_hash = ("%s/%s=") %(str(verboses), str(propertys))
-
-				if(wrapper == int(octet_algorithm)):
-					self.decs_hash = ("%s+%s=") %(str(propertys), str(verboses))
-				if(restricted == int(octet_algorithm)):
-					self.decs_hash = ("%s-%s=") %(str(propertys), str(verboses))
-				if(restrictes == int(octet_algorithm)):
-					self.decs_hash = ("%s-%s=") %(str(verboses), str(propertys))
-				if(multipdata == int(octet_algorithm)):
-					self.decs_hash = ("%s*%s=") %(str(propertys), str(verboses))
-
-		return self.decs_hash
+				# We are in a condition that will test specific variables like the variable #FirstValue #SecondValue
+				# Variables that behave in a way with bytes.
 
 
+				if AddModel == int(octet_algorithm):
+					self.hash_dec = "%s+%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
+				if SubModel == int(octet_algorithm):
+					self.hash_dec = "%s-%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
+
+				# We do not have supervariables like for example with the selfs or that kind of thing.
+				# But it's always good to have the selfs to communicate the variables everywhere.
+
+				if Sub_Model == int(octet_algorithm):
+					self.hash_dec = "%s-%s=" % (str(self.CalculationOctet), str(self.CalculationBytes))
+				if MulModel == int(octet_algorithm):
+					self.hash_dec = "%s*%s=" % (str(self.CalculationBytes), str(self.CalculationOctet))
+
+		return self.hash_dec
