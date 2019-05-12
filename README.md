@@ -15,6 +15,13 @@ There are two options available in the program, --files and --wordlist.
       -w WORDLIST, --wordlist=WORDLIST
                             The wordlist for crack.
 
+Development
+----
+
+This program was developed under linux, because the file 7z is already installed by default on Linux but the program can work very well under Windows if you manage a little alone.
+
+    Linux
+
 Use :
 ----
     root@Computer:/home/Computer/Desktop# python server.py --files backup.7z --wordlist lists.txt
