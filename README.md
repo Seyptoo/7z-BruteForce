@@ -28,16 +28,6 @@ Use :
 As you can see, you have to use 2 functions to run the program. The --files option for the 7z file name and finally --wordlist for the file list that will test the passwords.
 
     root@Computer:/home/Computer/Desktop# python server.py --files backup.7z --wordlist lists.txt
-    [-] Password not found sorry : password
-    [-] Password not found sorry : testing
-    [-] Password not found sorry : gmail
-    [-] Password not found sorry : backup
-    [-] Password not found sorry : love
-    [-] Password not found sorry : password123
-    [-] Password not found sorry : bruteforce
-    [-] Password not found sorry : server
-    [-] Password not found sorry : love1234
-    [-] Password not found sorry : attacker
-    [-] Password not found sorry : proxy
-
-    [+] Password 7z cracked with success : delete
+    Copyright (c) 2019 by Seyptoo.
+    7z-Bruteforce cracker password, version 1.0.0.0-7z-1 467/220563.
+    [SUCCESS] Password cracked with success : password
