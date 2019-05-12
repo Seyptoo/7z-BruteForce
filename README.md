@@ -2,6 +2,19 @@
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
+Options
+----
+There are two options available in the program, --files and --wordlist.
+
+    Usage: latex.py [options]
+
+    Options:
+      -h, --help            show this help message and exit
+      -f FILES, --files=FILES
+                            The 7z file to crack.
+      -w WORDLIST, --wordlist=WORDLIST
+                            The wordlist for crack.
+
 Use :
 ----
     root@Computer:/home/Computer/Desktop# python server.py --files backup.7z --wordlist lists.txt
