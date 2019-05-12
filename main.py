@@ -73,7 +73,6 @@ class SevenZip(threading.Thread):
 					reads_line = "\r7z-Bruteforce cracker password, version 1.0.0.0-7z-1 %d/%d." %(ptr_count, count_line)
 					sys.stdout.write(reads_line)
 					sys.stdout.flush()
-
 		else:
 			raise exceptions.SevenZipIncorrect("File is extensions incorrect.")
 
