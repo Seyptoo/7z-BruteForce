@@ -12,8 +12,8 @@ class SevenZipIncorrect(Exception):
 		self.error_zip = error_zip
 
 class SevenZipNoInstall(Exception):
-        def __init__(self, not_installed):
-                self.not_installed = not_installed
+	def __init__(self, not_installed):
+		self.not_installed = not_installed
 
 class SevenZip(threading.Thread):
 	def __init__(self, threads=35, command=None):
