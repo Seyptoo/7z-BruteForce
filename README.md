@@ -24,6 +24,9 @@ This program was developed under linux, because the file 7z is already installed
 
 Use :
 ----
+
+As you can see, you have to use 2 functions to run the program. The --files option for the 7z file name and finally --wordlist for the file list that will test the passwords.
+
     root@Computer:/home/Computer/Desktop# python server.py --files backup.7z --wordlist lists.txt
     [-] Password not found sorry : password
     [-] Password not found sorry : testing
