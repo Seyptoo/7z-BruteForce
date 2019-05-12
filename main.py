@@ -2,23 +2,18 @@
 #coding:utf-8
 
 import sys
-import os as return_p
 import Queue
 import platform
 import threading
+import subprocess
+import os as return_p
 
 from core import options
-
-class SevenZipIncorrect(Exception):
-	def __init__(self, error_zip):
-		self.error_zip = error_zip
-
-class SevenZipNoInstall(Exception):
-	def __init__(self, not_installed):
-		self.not_installed = not_installed
+from core import exceptions
 
 class SevenZip(threading.Thread):
 	def __init__(self, threads=35, command=None):
+		threading.Thread.__init__(self)
 		'''
 			create function for call after
 			the variable __init__().
@@ -33,8 +28,6 @@ class SevenZip(threading.Thread):
 		elif(self.argument_on == None or self.argument_wd == None):
 			sys.exit(return_p.system("python %s -h" %(sys.argv[0])))
 
-		threading.Thread.__init__(self)
-
 	def is_tool(self):
 		'''
 			This function is used to test whether
@@ -42,11 +35,11 @@ class SevenZip(threading.Thread):
 		'''
 		if(platform.system() == "Linux"):
 			if(return_p.system("which 7z") != 0):
-				raise SevenZipNoInstall("Please install 7z in your computer.")
+				raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 				
 		elif(platform.system() == "Windows"):
 			if(return_p.system("where /7z") != 0):
-				raise SevenZipNoInstall("Please install 7z in your computer.")
+				raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 
 	def ExtensionModel(self, q):
 		"""
@@ -65,18 +58,17 @@ class SevenZip(threading.Thread):
 		"""
 		if(self.argument_on.endswith(".7z") == True):
 			while True:
-				bert_model = q.get()
-				
-				self.command_tds = ("7z x -p%s %s -aoa >/dev/null" %(bert_model, self.argument_on))
-				output_status_ts = return_p.system(self.command_tds)
+				command_list = q.get()
+				command_send = "7z x -p%s %s -aoa >/dev/null" %(command_list, self.argument_on)
+				self.command = return_p.system(command_send)
 
-				if(output_status_ts == 0):
-					sys.exit("\n[+] Password cracked with success : %s\n" %(bert_model))
-				else: 
-					print "[-] Password not cracked : %s" %(bert_model)
+				if(self.command == 0):
+					print("\n[SUCCESS] Password cracked with success : %s\n" %(command_list)), sys.exit(0)
+				elif(self.command != 0): 
+					print("[FAILED] Password not cracked : %s" %(command_list))
 
 		else:
-			raise SevenZipIncorrect("File is extensions incorrect.")
+			raise exceptions.SevenZipIncorrect("File is extensions incorrect.")
 
 	def run(self):
 		"""
