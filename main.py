@@ -11,7 +11,7 @@ from core import options
 from core import exceptions
 
 class SevenZip(threading.Thread):
-	def __init__(self, threads=100, command=None):
+	def __init__(self, threads=100, command=0):
 		threading.Thread.__init__(self)
 		'''
 			create function for call after
@@ -33,11 +33,11 @@ class SevenZip(threading.Thread):
 			the 7z program exists on the computer __is_tool(self)__.
 		'''
 		if(platform.system() == "Linux"):
-			if(return_p.system("which 7z") != 0):
+			if(return_p.system("which 7z >/dev/null") != 0):
 				raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 				
 		elif(platform.system() == "Windows"):
-			if(return_p.system("where /7z") != 0):
+			if(return_p.system("where /7z > NUL") != 0):
 				raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 
 	def ExtensionModel(self, q):
@@ -55,16 +55,24 @@ class SevenZip(threading.Thread):
 			This function will return 
 			the attack and password cracker
 		"""
+		print("Copyright (c) 2019 by Seyptoo.")
 		if(self.argument_on.endswith(".7z") == True):
+			ptr_count = 0
 			while True:
 				command_list = q.get()
 				command_send = "7z x -p%s %s -aoa >/dev/null" %(command_list, self.argument_on)
 				self.command = return_p.system(command_send)
 
 				if(self.command == 0):
-					print("\n[SUCCESS] Password cracked with success : %s\n" %(command_list)), sys.exit(0)
+					print("\n[SUCCESS] Password cracked with success : %s\n" %(command_list))
+					sys.exit(0)
+
 				elif(self.command != 0): 
-					print("[FAILED] Password not cracked : %s" %(command_list))
+					count_line = len(open(self.argument_wd).readlines())
+					ptr_count = ptr_count + 1
+					reads_line = "\r7z-Bruteforce cracker password, version 1.0.0.0-7z-1 %d/%d." %(ptr_count, count_line)
+					sys.stdout.write(reads_line)
+					sys.stdout.flush()
 
 		else:
 			raise exceptions.SevenZipIncorrect("File is extensions incorrect.")
