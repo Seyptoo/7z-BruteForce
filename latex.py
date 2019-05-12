@@ -1,3 +1,4 @@
+#!/usr/bin/env python 
 #coding:utf-8
 
 import sys
@@ -5,7 +6,8 @@ import os as return_p
 import Queue
 import platform
 import threading
-import optparse
+
+from core import options
 
 class SevenZipIncorrect(Exception):
 	def __init__(self, error_zip):
@@ -20,14 +22,19 @@ class SevenZip(threading.Thread):
 		'''
 			create function for call after
 			the variable __init__().
-			'''
-		threading.Thread.__init__(self)
+		'''
 		self.threads_tds = threads
 		self.command_tds = command
+		self.argument_on = options.files
+		self.argument_wd = options.wordlist
 
-		self.argument_on = sys.argv[1]
-		self.argument_wd = sys.argv[2]
-		
+		if(self.argument_on == None and self.argument_wd == None):
+			sys.exit(return_p.system("python %s -h" %(sys.argv[0])))
+		elif(self.argument_on == None or self.argument_wd == None):
+			sys.exit(return_p.system("python %s -h" %(sys.argv[0])))
+
+		threading.Thread.__init__(self)
+
 	def is_tool(self):
 		'''
 			This function is used to test whether
@@ -58,17 +65,18 @@ class SevenZip(threading.Thread):
 		"""
 		if(self.argument_on.endswith(".7z") == True):
 			while True:
-				BertModel = q.get()
-				self.command_tds = ("7z x -p%s %s -aoa >/dev/null" %(BertModel, self.argument_on))
+				bert_model = q.get()
+				
+				self.command_tds = ("7z x -p%s %s -aoa >/dev/null" %(bert_model, self.argument_on))
 				output_status_ts = return_p.system(self.command_tds)
+
 				if(output_status_ts == 0):
-					print "\n[+] Password cracked with success : %s\n" %(BertModel)
-					sys.exit(1)
+					sys.exit("\n[+] Password cracked with success : %s\n" %(bert_model))
 				else: 
-					print "[-] Password not cracked : %s" %(BertModel)
+					print "[-] Password not cracked : %s" %(bert_model)
 
 		else:
-			raise SevenZipIncorrect("File is extensions incorrect")
+			raise SevenZipIncorrect("File is extensions incorrect.")
 
 	def run(self):
 		"""
@@ -99,5 +107,5 @@ class SevenZip(threading.Thread):
 
 if __name__ == "__main__":
 	Algorithm = SevenZip()
-        Algorithm.is_tool()
+	Algorithm.is_tool()
 	Algorithm.start()
