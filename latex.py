@@ -17,29 +17,29 @@ class SevenZipNoInstall(Exception):
 
 class SevenZip(threading.Thread):
 	def __init__(self, threads=35, command=None):
-                '''
-                    create function for call after
-                    the variable __init__().
-                '''
+		'''
+			create function for call after
+			the variable __init__().
+			'''
 		threading.Thread.__init__(self)
 		self.threads_tds = threads
 		self.command_tds = command
 
 		self.argument_on = sys.argv[1]
 		self.argument_wd = sys.argv[2]
-
-        def is_tool(self):
-            '''
-                This function is used to test whether
-                the 7z program exists on the computer __is_tool(self)__.
-            '''
-            if(platform.system() == "Linux"):
-                if(return_p.system("which 7z") != 0):
-                    raise SevenZipNoInstall("Please install 7z in your computer.")
-
-            elif(platform.system() == "Windows"):
-                if(return_p.system("where /7z") != 0):
-                    raise SevenZipNoInstall("Please install 7z in your computer.")
+		
+	def is_tool(self):
+		'''
+			This function is used to test whether
+			the 7z program exists on the computer __is_tool(self)__.
+		'''
+		if(platform.system() == "Linux"):
+			if(return_p.system("which 7z") != 0):
+				raise SevenZipNoInstall("Please install 7z in your computer.")
+				
+		elif(platform.system() == "Windows"):
+			if(return_p.system("where /7z") != 0):
+				raise SevenZipNoInstall("Please install 7z in your computer.")
 
 	def ExtensionModel(self, q):
 		"""
