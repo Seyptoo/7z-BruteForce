@@ -2,7 +2,6 @@
 #coding:utf-8
 
 import sys
-import Queue
 import platform
 import threading
 import subprocess
@@ -12,7 +11,7 @@ from core import options
 from core import exceptions
 
 class SevenZip(threading.Thread):
-	def __init__(self, threads=35, command=None):
+	def __init__(self, threads=100, command=None):
 		threading.Thread.__init__(self)
 		'''
 			create function for call after
@@ -83,7 +82,16 @@ class SevenZip(threading.Thread):
 		----
 			This function will not return much
 		"""
-		q = Queue.Queue()
+		if(sys.version_info >= (2, 0)):
+			import queue
+			q = queue.Queue()
+		else:
+			import Queue
+			q = Queue.Queue()
+
+		# So concretely the system of threads that passes here in this function.
+		# The default thread is 100 to handle the GPU __run__().
+
 		with open(self.argument_wd, "r") as BertModel:
 			for Queue_Reverse in BertModel:
 				q.put(Queue_Reverse.rstrip("\n\r"))
