@@ -4,7 +4,7 @@
 
 Use :
 ----
-    root@Computer:/home/Computer/Desktop# python server.py backup.7z lists.txt
+    root@Computer:/home/Computer/Desktop# python server.py --files backup.7z --wordlist lists.txt
     [-] Password not found sorry : password
     [-] Password not found sorry : testing
     [-] Password not found sorry : gmail
