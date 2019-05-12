@@ -1,8 +1,9 @@
 #coding:utf-8
 
 import sys
-import os as subprocessing
+import os as return_p
 import Queue
+import platform
 import threading
 import optparse
 
@@ -10,15 +11,35 @@ class SevenZipIncorrect(Exception):
 	def __init__(self, error_zip):
 		self.error_zip = error_zip
 
+class SevenZipNoInstall(Exception):
+        def __init__(self, not_installed):
+                self.not_installed = not_installed
+
 class SevenZip(threading.Thread):
 	def __init__(self, threads=35, command=None):
+                '''
+                    create function for call after
+                    the variable __init__().
+                '''
 		threading.Thread.__init__(self)
-		# System of Threads is present
 		self.threads_tds = threads
 		self.command_tds = command
 
 		self.argument_on = sys.argv[1]
 		self.argument_wd = sys.argv[2]
+
+        def is_tool(self):
+            '''
+                This function is used to test whether
+                the 7z program exists on the computer __is_tool(self)__.
+            '''
+            if(platform.system() == "Linux"):
+                if(return_p.system("which 7z") != 0):
+                    raise SevenZipNoInstall("Please install 7z in your computer.")
+
+            elif(platform.system() == "Windows"):
+                if(return_p.system("where /7z") != 0):
+                    raise SevenZipNoInstall("Please install 7z in your computer.")
 
 	def ExtensionModel(self, q):
 		"""
@@ -37,19 +58,16 @@ class SevenZip(threading.Thread):
 		"""
 		if(self.argument_on.endswith(".7z") == True):
 			while True:
-				BertModel = q
-				BertModel = BertModel.get()
-				# Execution command for bruteforce ! :D
+				BertModel = q.get()
 				self.command_tds = ("7z x -p%s %s -aoa >/dev/null" %(BertModel, self.argument_on))
-				output_status_ts = subprocessing.system(self.command_tds)
-				# Starting bruteforce ! :D
+				output_status_ts = return_p.system(self.command_tds)
 				if(output_status_ts == 0):
 					print "\n[+] Password cracked with success : %s\n" %(BertModel)
 					sys.exit(1)
-				else: # If password is not cracked.
+				else: 
 					print "[-] Password not cracked : %s" %(BertModel)
 
-		else: # exceptions error
+		else:
 			raise SevenZipIncorrect("File is extensions incorrect")
 
 	def run(self):
@@ -81,4 +99,5 @@ class SevenZip(threading.Thread):
 
 if __name__ == "__main__":
 	Algorithm = SevenZip()
+        Algorithm.is_tool()
 	Algorithm.start()
