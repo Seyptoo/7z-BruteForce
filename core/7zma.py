@@ -30,6 +30,10 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
         raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 
 def seven_archive_exist(seven_archive):
+    '''
+        Lets you test if the 7z file exists in the computer system
+        __check_filenames__().
+    '''
     try:
         with open(seven_archive, "rb") as enumeration_file:
             enumeration_file = True
@@ -57,8 +61,11 @@ def decompress_data(filename_archive, end_password):
         method_req += __name__["BINARY_STRINGS"]
 
     if(return_p.system(method_req) == 0):
-        method_req = True
-    else:
-        method_req = False
+        password_bool = True
+    elif(return_p.system(method_req) != 0):
+        password_bool = False
 
-    return method_req
+    # So concretely it will return true or
+    # false if the password is wrong or not decompress_data()
+
+    return password_bool
