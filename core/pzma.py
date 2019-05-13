@@ -10,7 +10,7 @@ __name__ = {
     __all__[2]:"-p",
     __all__[3]:"-aoa",
     __all__[4]:">/dev/null"
-    }
+}
 
 '''
 This module will do a lot of things to
@@ -21,18 +21,26 @@ import os as return_p
 import re
 import sys
 import shutil
-import options
 import platform
-import exceptions
+
+from core import options
+from core import exceptions
 
 if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
     if(return_p.system("which 7z >/dev/null") != 0):
         raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 
 class pzma_br(object):
-    def __init__(self, enumeration_file=None, property_c=" "):
+    def __init__(self, enumeration_file=None,
+                command_pzma=None, try_pass=None, property_c=" "):
+	'''
+            I have created some options for the object for the care of the
+            program __pzma_br()__.            		
+	'''
         self.enumeration_file = enumeration_file
+	self.command_pzma     = command_pzma
         self.property_c       = property_c
+        self.try_pass         = try_pass
 
     def seven_archive_exist(self, seven_archive):
         '''
@@ -52,21 +60,22 @@ class pzma_br(object):
 
     def decompress_data(self, filename_archive, end_password):
         '''
-        This function is used to decrypt
-        the file __decompress_data()__.
+            This function is used to decrypt
+            the file __decompress_data()__.
         '''
-        method_req  = __name__["DECOMPRESS"] + self.property_c
-        method_req += __name__["COMPRESS"] + self.property_c
-        method_req += __name__["DECOMPRESS_PASSWORD"] + end_password + self.property_c + options.files + self.property_c
-        method_req += __name__["COMPRESS_PASSWORD"] + self.property_c
-        method_req += __name__["BINARY_STRINGS"]
+        self.command_pzma  = __name__["DECOMPRESS"] + self.property_c
+        self.command_pzma += __name__["COMPRESS"] + self.property_c
+        self.command_pzma += __name__["DECOMPRESS_PASSWORD"] + end_password + self.property_c + options.files + self.property_c
+        self.command_pzma += __name__["COMPRESS_PASSWORD"] + self.property_c
+        self.command_pzma += __name__["BINARY_STRINGS"]
 
-        if(return_p.system(method_req) == 0):
-            password_bool = True
-        elif(return_p.system(method_req) != 0):
-            password_bool = False
+        if(return_p.system(self.command_pzma) == 0):
+            self.try_pass = True
+
+        elif(return_p.system(self.command_pzma) != 0):
+            self.try_pass = False
 
         # So concretely it will return true or
         # false if the password is wrong or not decompress_data()
 
-        return password_bool
+        return self.try_pass
