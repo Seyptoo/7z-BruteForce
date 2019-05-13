@@ -33,12 +33,12 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
 class pzma_br(object):
     def __init__(self, enumeration_file=None,
                 command_pzma=None, try_pass=None, property_c=" "):
-	'''
+			'''
             I have created some options for the object for the care of the
-            program __pzma_br()__.            		
-	'''
+            program __pzma_br()__.            	
+			'''
         self.enumeration_file = enumeration_file
-	self.command_pzma     = command_pzma
+				self.command_pzma     = command_pzma
         self.property_c       = property_c
         self.try_pass         = try_pass
 
