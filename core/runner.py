@@ -7,7 +7,7 @@ import threading
 import exceptions
 
 class runner(threading.Thread):
-    def __init__(self, output_condition=None, error_condition=None, output_threading=35):
+    def __init__(self, output_condition=None, error_condition=None, output=threading=35):
         threading.Thread.__init__(self)
         '''
             create function for call after
@@ -30,6 +30,19 @@ class runner(threading.Thread):
 
         if(self.output_condition.seven_check_file(options.files) == False):
             raise exceptions.SevenZipIncorrect("7z, please select archive file .7z.")
+
+    def run(self):
+        '''
+            This system makes it possible to
+            accelerate bruteforce __run__()
+        '''
+        if(sys.version_info >= (2, 0)):
+            import queue
+            q = queue.Queue()
+
+        elif(sys.version_info <= (3, 0)):
+            import Queue
+            q = Queue.Queue()
 
 if __name__ == "__main__":
     runner()
