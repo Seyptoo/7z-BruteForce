@@ -21,9 +21,10 @@ import os as return_p
 import re
 import sys
 import shutil
-import options
 import platform
-import exceptions
+
+from core import exceptions
+from core import options
 
 if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
     if(return_p.system("which 7z >/dev/null") != 0):
@@ -32,7 +33,7 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
 def seven_archive_exist(seven_archive):
     '''
         Lets you test if the 7z file exists in the computer system
-        __check_filenames__().
+        in function for check __check_filenames__().
     '''
     try:
         with open(seven_archive, "rb") as enumeration_file:
@@ -52,12 +53,11 @@ def decompress_data(filename_archive, end_password):
     '''
     property_c = " "
 
-    if(seven_archive_exist(options.files) == True):
-        method_req  = __name__["DECOMPRESS"] + property_c
-        method_req += __name__["COMPRESS"] + property_c
-        method_req += __name__["DECOMPRESS_PASSWORD"] + end_password + property_c
-        method_req += __name__["COMPRESS_PASSWORD"] + property_c
-        method_req += __name__["BINARY_STRINGS"]
+    method_req  = __name__["DECOMPRESS"] + property_c
+    method_req += __name__["COMPRESS"] + property_c
+    method_req += __name__["DECOMPRESS_PASSWORD"] + end_password + property_c + options.files + property_c
+    method_req += __name__["COMPRESS_PASSWORD"] + property_c
+    method_req += __name__["BINARY_STRINGS"]
 
     if(return_p.system(method_req) == 0):
         password_bool = True
