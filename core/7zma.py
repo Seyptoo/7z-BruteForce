@@ -1,14 +1,14 @@
 #/usr/bin/env python
 #coding:utf-8
 
-__all__ = ["DECOMPRESS", "COMPRESS", "DECOMPRESS_PASSWORD", "COMPRESS_PASSWORD",
-            "BINARY_STRINGS", "SPEED_BRUTEFORCE", "NEGATIVE_OUTPUT"]
-
 __name__ = {
     "-p"  :__all__[0],
     "-x"  :__all__[2],
     "-aoa":__all__[::-1]
     }
+
+__all__ = ["DECOMPRESS", "COMPRESS", "DECOMPRESS_PASSWORD", "COMPRESS_PASSWORD",
+            "BINARY_STRINGS", "SPEED_BRUTEFORCE", "NEGATIVE_OUTPUT"]
 
 '''
 This module will do a lot of things to
@@ -29,7 +29,7 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
 def seven_archive_exist(seven_archive):
     '''
         Lets you test if the 7z file exists in the computer system
-        __check_filenames__().
+        in function for checking seven_archive_exist().
     '''
     try:
         with open(seven_archive, "rb") as enumeration_file:
