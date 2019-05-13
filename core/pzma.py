@@ -31,16 +31,18 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
         raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 
 class pzma_br(object):
-    def __init__(self, enumeration_file=None,
-                command_pzma=None, try_pass=None, property_c=" "):
-			'''
+    def __init__(self, section_one=None,
+                section_two=None, section_three=None,
+                section_four=" ", section_five=None):
+	'''
             I have created some options for the object for the care of the
-            program __pzma_br()__.            	
-			'''
-        self.enumeration_file = enumeration_file
-				self.command_pzma     = command_pzma
-        self.property_c       = property_c
-        self.try_pass         = try_pass
+            program __pzma_br()__.            		
+	'''
+        self.section_one   = section_one
+	self.section_two   = section_two
+        self.section_three = section_three
+        self.section_four  = section_four
+        self.section_five  = section_five
 
     def seven_archive_exist(self, seven_archive):
         '''
@@ -48,34 +50,51 @@ class pzma_br(object):
             in function for check __check_filenames__().
         '''
         try:
-            with open(seven_archive, "rb") as self.enumeration_file:
-                self.enumeration_file = True
+            with open(seven_archive, "rb") as self.section_one:
+                self.section_one = True
         except IOError as error_file_output:
-            self.enumeration_file = False
+            self.section_one = False
 
         # The return value in function __seven_archive_exist()__,
         # is exactly here my friends for calling after function().
 
-        return self.enumeration_file
+        return self.section_one
 
-    def decompress_data(self, filename_archive, end_password):
+    def decompress_data(self, seven_filename, seven_password):
         '''
             This function is used to decrypt
             the file __decompress_data()__.
         '''
-        self.command_pzma  = __name__["DECOMPRESS"] + self.property_c
-        self.command_pzma += __name__["COMPRESS"] + self.property_c
-        self.command_pzma += __name__["DECOMPRESS_PASSWORD"] + end_password + self.property_c + options.files + self.property_c
-        self.command_pzma += __name__["COMPRESS_PASSWORD"] + self.property_c
-        self.command_pzma += __name__["BINARY_STRINGS"]
+        self.section_two  = __name__["DECOMPRESS"] + self.section_three
+        self.section_two += __name__["COMPRESS"] + self.section_three
+        self.section_two += __name__["DECOMPRESS_PASSWORD"] + seven_password + self.section_three + options.files + self.section_three
+        self.section_two += __name__["COMPRESS_PASSWORD"] + self.section_three
+        self.section_two += __name__["BINARY_STRINGS"]
 
-        if(return_p.system(self.command_pzma) == 0):
-            self.try_pass = True
+        if(return_p.system(self.section_two) == 0):
+            self.section_four = True
 
-        elif(return_p.system(self.command_pzma) != 0):
-            self.try_pass = False
+        elif(return_p.system(self.section_two) != 0):
+            self.section_four = False
 
         # So concretely it will return true or
         # false if the password is wrong or not decompress_data()
 
-        return self.try_pass
+        return self.section_four
+
+    def pzma_file(self, seven_check):
+        '''
+            This function is used to test if
+            the file is a 7zip file __pzma_file()__.
+        '''
+        if(seven_check.endswith(".7z") == False):
+            self.section_five = False
+
+        elif(seven_check.endswith(".7z") == True):
+            self.section_five = True
+
+        # So this function allows to test if the program is a 7z file.
+        # the function name is pzma_br().pzma_file().
+
+        return self.section_five
+
