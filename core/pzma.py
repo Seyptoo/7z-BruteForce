@@ -53,9 +53,6 @@ class pzma_br(object):
                 elif(return_p.system("which 7z >/dev/null") == 0):
                     self.section_six = True
 
-        # the return value in function __seven_which_exist__().
-        # if 7z in the path return true or return false.
-
         return self.section_six
 
     def seven_archive_exist(self, seven_archive):
@@ -68,9 +65,6 @@ class pzma_br(object):
                 self.section_one = True
         except IOError as error_file_output:
             self.section_one = False
-
-        # The return value in function __seven_archive_exist()__,
-        # is exactly here my friends for calling after function().
 
         return self.section_one
 
@@ -91,9 +85,6 @@ class pzma_br(object):
         elif(return_p.system(self.section_two) != 0):
             self.section_four = False
 
-        # So concretely it will return true or
-        # false if the password is wrong or not decompress_data()
-
         return self.section_four
 
     def seven_check_file(self, seven_check):
@@ -106,9 +97,6 @@ class pzma_br(object):
 
         elif(seven_check.endswith(".7z") == True):
             self.section_five = True
-
-        # So this function allows to test if the program is a 7z file.
-        # the function name is pzma_br().pzma_file().
 
         return self.section_five
 
