@@ -21,10 +21,9 @@ import os as return_p
 import re
 import sys
 import shutil
+import options
 import platform
-
-from core import exceptions
-from core import options
+import exceptions
 
 if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
     if(return_p.system("which 7z >/dev/null") != 0):
@@ -35,7 +34,7 @@ class pzma_br(object):
         self.enumeration_file = enumeration_file
         self.property_c       = property_c
 
-    def seven_archive_exist(seven_archive):
+    def seven_archive_exist(self, seven_archive):
         '''
             Lets you test if the 7z file exists in the computer system
             in function for check __check_filenames__().
@@ -51,7 +50,7 @@ class pzma_br(object):
 
         return self.enumeration_file
 
-    def decompress_data(filename_archive, end_password):
+    def decompress_data(self, filename_archive, end_password):
         '''
         This function is used to decrypt
         the file __decompress_data()__.
