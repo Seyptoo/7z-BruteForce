@@ -30,10 +30,6 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
         raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
 
 def seven_archive_exist(seven_archive):
-    '''
-        Lets you test if the 7z file exists in the computer system
-        __check_filenames__().
-    '''
     try:
         with open(seven_archive, "rb") as enumeration_file:
             enumeration_file = True
