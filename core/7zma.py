@@ -56,7 +56,6 @@ def decompress_data(filename_archive, end_password):
         method_req  = __name__["DECOMPRESS"] + property_c
         method_req += __name__["COMPRESS"] + property_c
         method_req += __name__["DECOMPRESS_PASSWORD"] + end_password + property_c
-        method_req += options.files + property_c
         method_req += __name__["COMPRESS_PASSWORD"] + property_c
         method_req += __name__["BINARY_STRINGS"]
 
