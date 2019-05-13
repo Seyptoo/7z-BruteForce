@@ -34,15 +34,15 @@ class pzma_br(object):
     def __init__(self, section_one=None,
                 section_two=None, section_three=None,
                 section_four=" ", section_five=None):
-	'''
-            I have created some options for the object for the care of the
-            program __pzma_br()__.            		
-	'''
-        self.section_one   = section_one
-	self.section_two   = section_two
-        self.section_three = section_three
-        self.section_four  = section_four
-        self.section_five  = section_five
+			'''
+				I have created some options for the object for the care of the
+				program __pzma_br()__.            		
+			'''
+			self.section_one   = section_one
+			self.section_two   = section_two
+			self.section_three = section_three
+			self.section_four  = section_four
+			self.section_five  = section_five
 
     def seven_archive_exist(self, seven_archive):
         '''
