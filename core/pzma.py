@@ -26,23 +26,33 @@ import platform
 from core import options
 from core import exceptions
 
-if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
-    if(return_p.system("which 7z >/dev/null") != 0):
-        raise exceptions.SevenZipNoInstall("Please install 7z in your computer.")
-
 class pzma_br(object):
     def __init__(self, section_one=None,
                 section_two=None, section_three=None,
-                section_four=" ", section_five=None):
-			'''
-				I have created some options for the object for the care of the
-				program __pzma_br()__.            		
-			'''
-			self.section_one   = section_one
-			self.section_two   = section_two
-			self.section_three = section_three
-			self.section_four  = section_four
-			self.section_five  = section_five
+                section_four=" ", section_five=None, section_six=None):
+	'''
+            I have created some options for the object for the care of the
+            program __pzma_br()__.            		
+	'''
+        self.section_one   = section_one
+	self.section_two   = section_two
+        self.section_three = section_three
+        self.section_four  = section_four
+        self.section_five  = section_five
+        self.section_six   = section_six
+
+    def seven_which_exist(self):
+        '''
+            This function will test if the
+            7z program exists in the computer system __seven_which_exist()__.
+        '''
+        if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
+                if(return_p.system("which 7z >/dev/null") != 0):
+                    self.section_six = False
+                elif(return_p.system("which 7z >/dev/null") == 0):
+                    self.section_six = True
+
+        return self.section_six
 
     def seven_archive_exist(self, seven_archive):
         '''
@@ -60,7 +70,7 @@ class pzma_br(object):
 
         return self.section_one
 
-    def decompress_data(self, seven_filename, seven_password):
+    def seven_decompress_data(self, seven_filename, seven_password):
         '''
             This function is used to decrypt
             the file __decompress_data()__.
@@ -82,7 +92,7 @@ class pzma_br(object):
 
         return self.section_four
 
-    def pzma_file(self, seven_check):
+    def seven_check_file(self, seven_check):
         '''
             This function is used to test if
             the file is a 7zip file __pzma_file()__.
@@ -98,3 +108,5 @@ class pzma_br(object):
 
         return self.section_five
 
+if __name__ == "__main__":
+    pass
