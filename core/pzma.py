@@ -29,15 +29,15 @@ from core import exceptions
 class pzma_br(object):
     def __init__(self, section_one=None, section_two=None, section_four=" ",
                 section_five=None, section_six=None):
-	'''
-            I have created some options for the object for the care of the
-            program __pzma_br()__.            		
-	'''
-        self.section_one   = section_one
-	self.section_two   = section_two
-        self.section_four  = section_four
-        self.section_five  = section_five
-        self.section_six   = section_six
+			'''
+				I have created some options for the object for the care of the
+				program __pzma_br()__.            		
+			'''
+			self.section_one   = section_one
+			self.section_two   = section_two
+			self.section_four  = section_four
+			self.section_five  = section_five
+			self.section_six   = section_six
 
     def seven_which_exist(self):
         '''
