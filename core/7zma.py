@@ -1,19 +1,22 @@
 #/usr/bin/env python
 #coding:utf-8
 
-__name__ = {
-    "-p"  :__all__[0],
-    "-x"  :__all__[2],
-    "-aoa":__all__[::-1]
-    }
-
 __all__ = ["DECOMPRESS", "COMPRESS", "DECOMPRESS_PASSWORD", "COMPRESS_PASSWORD",
-            "BINARY_STRINGS", "SPEED_BRUTEFORCE", "NEGATIVE_OUTPUT"]
+            "BINARY_STRINGS", "SPEED_BRUTEFORCE", "NEGATIVE_OUTPUT", "DIRECT_NULL"]
+
+__name__ = {
+    __all__[0]:"7z",
+    __all__[1]:"x",
+    __all__[2]:"-p",
+    __all__[3]:"-aoa",
+    __all__[4]:">/dev/null"
+    }
 
 '''
 This module will do a lot of things to
 manage the attacks and do a lot of manipulation.
 '''
+
 import os as return_p
 import re
 import sys
@@ -29,7 +32,7 @@ if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
 def seven_archive_exist(seven_archive):
     '''
         Lets you test if the 7z file exists in the computer system
-        in function for checking seven_archive_exist().
+        __check_filenames__().
     '''
     try:
         with open(seven_archive, "rb") as enumeration_file:
@@ -47,5 +50,19 @@ def decompress_data(filename_archive, end_password):
        This function is used to decrypt
        the file __decompress_data()__.
     '''
+    property_c = " "
+
     if(seven_archive_exist(options.files) == True):
-        pass
+        method_req  = __name__["DECOMPRESS"] + property_c
+        method_req += __name__["COMPRESS"] + property_c
+        method_req += __name__["DECOMPRESS_PASSWORD"] + end_password + property_c
+        method_req += options.files + property_c
+        method_req += __name__["COMPRESS_PASSWORD"] + property_c
+        method_req += __name__["BINARY_STRINGS"]
+
+    if(return_p.system(method_req) == 0):
+        method_req = True
+    else:
+        method_req = False
+
+    return method_req
