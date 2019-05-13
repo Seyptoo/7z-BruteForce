@@ -44,5 +44,17 @@ class runner(threading.Thread):
             import Queue
             q = Queue.Queue()
 
-if __name__ == "__main__":
-    runner()
+        # So concretely the system of threads that passes here in this function.
+        # The default thread is 100 to handle the GPU __run__().
+
+        with open(options.wordlist, "r") as bert_model:
+            for queue_reverse in bert_model:
+                q.put(queue_reverse.rstrip("\n\r"))
+
+        for i in range(int(self.output_threading)):
+            wrapper = threading.Thread(target=self.eqs, args=(i, q))
+            wrapper.setDaemon(True)
+            wrapper.start()
+            wrapper.join(600)
+
+        q.join()
