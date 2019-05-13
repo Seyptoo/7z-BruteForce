@@ -30,12 +30,12 @@ class pzma_br(object):
     def __init__(self, section_one=None,
                 section_two=None, section_three=None,
                 section_four=" ", section_five=None, section_six=None):
-	'''
-            I have created some options for the object for the care of the
+				'''
+						I have created some options for the object for the care of the
             program __pzma_br()__.            		
-	'''
+				'''
         self.section_one   = section_one
-	self.section_two   = section_two
+				self.section_two   = section_two
         self.section_three = section_three
         self.section_four  = section_four
         self.section_five  = section_five
@@ -49,8 +49,12 @@ class pzma_br(object):
         if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
                 if(return_p.system("which 7z >/dev/null") != 0):
                     self.section_six = False
+
                 elif(return_p.system("which 7z >/dev/null") == 0):
                     self.section_six = True
+
+        # the return value in function __seven_which_exist__().
+        # if 7z in the path return true or return false.
 
         return self.section_six
 
