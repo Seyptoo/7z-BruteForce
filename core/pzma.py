@@ -38,7 +38,7 @@ class pzma_br(object):
             program __pzma_br()__.            		
 	'''
         self.enumeration_file = enumeration_file
-	self.command_pzma     = command_pzma
+				self.command_pzma     = command_pzma
         self.property_c       = property_c
         self.try_pass         = try_pass
 
