@@ -27,16 +27,14 @@ from core import options
 from core import exceptions
 
 class pzma_br(object):
-    def __init__(self, section_one=None,
-                section_two=None, section_three=None,
-                section_four=" ", section_five=None, section_six=None):
-				'''
-						I have created some options for the object for the care of the
+    def __init__(self, section_one=None, section_two=None, section_four=" ",
+                section_five=None, section_six=None):
+	'''
+            I have created some options for the object for the care of the
             program __pzma_br()__.            		
-				'''
+	'''
         self.section_one   = section_one
-				self.section_two   = section_two
-        self.section_three = section_three
+	self.section_two   = section_two
         self.section_four  = section_four
         self.section_five  = section_five
         self.section_six   = section_six
@@ -53,6 +51,9 @@ class pzma_br(object):
                 elif(return_p.system("which 7z >/dev/null") == 0):
                     self.section_six = True
 
+        # the return value in function __seven_which_exist__().
+        # if 7z in the path return true or return false.
+
         return self.section_six
 
     def seven_archive_exist(self, seven_archive):
@@ -66,6 +67,9 @@ class pzma_br(object):
         except IOError as error_file_output:
             self.section_one = False
 
+        # The return value in function __seven_archive_exist()__,
+        # is exactly here my friends for calling after function().
+
         return self.section_one
 
     def seven_decompress_data(self, seven_filename, seven_password):
@@ -73,17 +77,21 @@ class pzma_br(object):
             This function is used to decrypt
             the file __decompress_data()__.
         '''
-        self.section_two  = __name__["DECOMPRESS"] + self.section_three
-        self.section_two += __name__["COMPRESS"] + self.section_three
-        self.section_two += __name__["DECOMPRESS_PASSWORD"] + seven_password + self.section_three + options.files + self.section_three
-        self.section_two += __name__["COMPRESS_PASSWORD"] + self.section_three
-        self.section_two += __name__["BINARY_STRINGS"]
+        section_three = " "
+        section_two   = __name__["DECOMPRESS"] + section_three
+        section_two  += __name__["COMPRESS"] + section_three
+        section_two  += __name__["DECOMPRESS_PASSWORD"] + seven_password + section_three + options.files + section_three
+        section_two  += __name__["COMPRESS_PASSWORD"] + section_three
+        section_two  += __name__["BINARY_STRINGS"]
 
-        if(return_p.system(self.section_two) == 0):
+        if(return_p.system(section_two) == 0):
             self.section_four = True
 
-        elif(return_p.system(self.section_two) != 0):
+        elif(return_p.system(section_two) != 0):
             self.section_four = False
+
+        # So concretely it will return true or
+        # false if the password is wrong or not decompress_data()
 
         return self.section_four
 
@@ -97,6 +105,9 @@ class pzma_br(object):
 
         elif(seven_check.endswith(".7z") == True):
             self.section_five = True
+
+        # So this function allows to test if the program is a 7z file.
+        # the function name is pzma_br().pzma_file().
 
         return self.section_five
 
