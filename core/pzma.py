@@ -45,11 +45,11 @@ class pzma_br(object):
             7z program exists in the computer system __seven_which_exist()__.
         '''
         if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
-            if(return_p.system("which 7z >/dev/null") != 0):
-                self.section_six = False
+					if(return_p.system("which 7z >/dev/null") != 0):
+						self.section_six = False
 						
-            elif(return_p.system("which 7z >/dev/null") == 0):
-		self.section_six = True
+					elif(return_p.system("which 7z >/dev/null") == 0):
+						self.section_six = True
 
         # the return value in function __seven_which_exist__().
         # if 7z in the path return true or return false.
