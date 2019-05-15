@@ -29,15 +29,15 @@ from core import exceptions
 class pzma_br(object):
     def __init__(self, section_one=None, section_two=None, section_four=" ",
                 section_five=None, section_six=None):
-			'''
-				I have created some options for the object for the care of the
-				program __pzma_br()__.            		
-			'''
-			self.section_one   = section_one
-			self.section_two   = section_two
-			self.section_four  = section_four
-			self.section_five  = section_five
-			self.section_six   = section_six
+		'''
+			I have created some options for the object for the care of the
+			program __pzma_br()__.            		
+		'''
+		self.section_one   = section_one
+		self.section_two   = section_two
+		self.section_four  = section_four
+		self.section_five  = section_five
+		self.section_six   = section_six
 
     def seven_which_exist(self):
         '''
@@ -45,11 +45,11 @@ class pzma_br(object):
             7z program exists in the computer system __seven_which_exist()__.
         '''
         if(sys.version_info >= (2, 0) and sys.version_info <= (3, 0)):
-					if(return_p.system("which 7z >/dev/null") != 0):
-						self.section_six = False
+			if(return_p.system("which 7z >/dev/null") != 0):
+				self.section_six = False
 						
-					elif(return_p.system("which 7z >/dev/null") == 0):
-						self.section_six = True
+			elif(return_p.system("which 7z >/dev/null") == 0):
+				self.section_six = True
 
         # the return value in function __seven_which_exist__().
         # if 7z in the path return true or return false.
@@ -63,9 +63,9 @@ class pzma_br(object):
         '''
         try:
             with open(seven_archive, "rb") as self.section_one:
-							self.section_one = True
+				self.section_one = True
         except IOError as error_file_output:
-					self.section_one = False
+				self.section_one = False
 
         # The return value in function __seven_archive_exist()__,
         # is exactly here my friends for calling after function().
@@ -85,10 +85,10 @@ class pzma_br(object):
         section_two  += __name__["BINARY_STRINGS"]
 
         if(return_p.system(section_two) == 0):
-					self.section_four = True
+			self.section_four = True
 
         elif(return_p.system(section_two) != 0):
-					self.section_four = False
+			self.section_four = False
 
         # So concretely it will return true or
         # false if the password is wrong or not decompress_data()
@@ -101,10 +101,10 @@ class pzma_br(object):
             the file is a 7zip file __pzma_file()__.
         '''
         if(seven_check.endswith(".7z") == False):
-					self.section_five = False
+			self.section_five = False
 
         elif(seven_check.endswith(".7z") == True):
-					self.section_five = True
+			self.section_five = True
 
         # So this function allows to test if the program is a 7z file.
         # the function name is pzma_br().pzma_file().
