@@ -95,7 +95,7 @@ class pzma_br(object):
 			
 		return self.section_four
 		
-	def seven_check_file(self, seven_check)
+	def seven_check_file(self, seven_check):
 		'''
 		This function is used to test if
 		the file is a 7zip file __pzma_file()__.
