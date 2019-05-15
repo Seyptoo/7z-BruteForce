@@ -2,9 +2,9 @@
 #coding:utf-8
 
 import sys
-import pzma
 import threading
 
+from core import pzma
 from core import options
 from core import exceptions
 
